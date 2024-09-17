@@ -5,43 +5,87 @@
 @using WebTarotReadings.Models
 
 <header>
-    <h3>TarotReading</h3>
+    <div class="symbols">
+        <img src="/Images/tarot_symbol.png" class="rotate_clocwize" />
+        <img src="/Images/tarot_symbol.png" class="rotate_counterclocwize" />
+    </div>
+    <div class="user_data" >
+        <label for="user_name"></label>
+        <label for="dob"></label>
+        <label for="horoscope"></label>
+    </div>
 </header>
 
 <div class="reader_container">
     @foreach (var card in tarotCards)
     {
-        <div class="tarot_card" @onclick="() => FlipCard()">
-            <div class="card_inner @(isFlipped ? "flipped" : "")">
+        <div class="tarot_card" style="z-index: @card._zIndex" @onclick="() => FlipCard(card)">
+            <div class="card_inner @(card._isFLipped ? "flipped increaseZ" : "")">
                 <div class="card_front">
                     <img src="@imageSrc"/>
                 </div>
                 <div class="card_back">
-                    <p class="card_name">@card.Key</p>
-                    <p class="card_text">@card.Value</p>
+                    <p class="card_name">@card._cardName</p>
                 </div>
             </div>
         </div>
     }
 </div>
+<div class="redeal">
+    <button onclick="@GenerateCards">Ponovno dijeljenje karata</button>
+</div>
 <div class="table">
-
+    <p class="card_title">@cardTitle</p>
+    <p class="card_text">@cardText</p>
 </div>
 
 @code {
-    [Inject] private TarotCardsService tarotCardsService { get; set; }
-    private bool isFlipped = false;
-    private string imageSrc = "";
-    Dictionary<string, string> tarotCards = new();
+    [Inject] private TarotCardsService? tarotCardsService { get; set; }
+    private string imageSrc = "../Images/card_back.jpg";
+    private string cardTitle = "";
+    private string cardText = "";
+    private int z_index = 0;
+    private List<VisualTarotModel> tarotCards = new();
     Random random = new Random();
+
+    public class VisualTarotModel
+    {
+        public string? _cardName { get; set; }
+        public string? _cardText { get; set; }
+        public bool _isFLipped { get; set; }
+        public int _zIndex { get; set; }
+    }
 
     protected override void OnInitialized()
     {
-        tarotCards = tarotCardsService.GenerateNewCards();
+        GenerateCards();
     }
 
-    private void FlipCard()
+    private void GenerateCards()
     {
-        isFlipped = true; 
+        tarotCards.Clear();
+        Dictionary<string, string> tempDict = new();
+        tempDict = tarotCardsService!.GenerateNewCards();
+
+        foreach (var item in tempDict)
+        {
+            tarotCards.Add(new VisualTarotModel
+                {
+                    _cardName = item.Key,
+                    _cardText = item.Value,
+                    _isFLipped = false
+                });
+        }
+
+        this.StateHasChanged();
+    }
+
+    private void FlipCard(VisualTarotModel card)
+    {
+        card._isFLipped = true;
+
+        cardTitle = card._cardName!;
+        cardText = card._cardText!;
+        card._zIndex = ++z_index;
     }
 }

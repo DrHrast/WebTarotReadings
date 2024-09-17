@@ -1,6 +1,15 @@
-﻿.body {
+﻿:root {
+    --z_index: 0;
+}
+
+.body {
     display: flex;
     flex-direction: column;
+}
+
+header {
+    display: flex;
+    height: 10%;
 }
 
 .reader_container {
@@ -52,6 +61,12 @@
 
 .card_front {
     background-color: #f0e68c; /* Example color for the front */
+    overflow: hidden;
+}
+
+.card_front > img {
+    width: inherit;
+    height: inherit;
 }
 
 .card_back {
@@ -65,6 +80,55 @@
 
 /* When clicked, flip the card */
 .flipped {
-    transform: translateY(-180px);
     transform: rotateY(180deg);
+}
+
+.symbols {
+    flex: 1;
+}
+
+.symbols > img {
+    height: inherit;
+    width: auto;
+    position: absolute;
+}
+
+.user_data {
+    flex: 2;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(180deg);
+    }
+
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes counter_rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(-180deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+.rotate_clocwize {
+    animation: rotate 2s infinite;
+}
+
+.rotate_counterclocwize {
+    animation: counter_rotate 2s ease infinite;
 }
