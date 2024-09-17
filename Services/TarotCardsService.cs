@@ -55,5 +55,6 @@ namespace WebTarotReadings.Services
 			}
 			return cards;
 		}
+
 	}
 }

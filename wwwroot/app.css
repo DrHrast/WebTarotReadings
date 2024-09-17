@@ -1,6 +1,10 @@
 @import "reading_page.css";
 @import "home.css";
 
+@font-face {
+    font-family: 'Celtic Hand';
+    src: url('/Fonts/CELTICHD.TTF') format('truetype');
+}
 
 h1:focus {
     outline: none;
