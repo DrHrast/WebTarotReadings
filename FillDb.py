@@ -1,5 +1,8 @@
 import pyodbc
 import pandas as pd
+import sys
+
+sys.stdout.reconfigure(encoding='utf-8')
  
 def read_excel_file(file_path, table_name):
     # Load Excel data 
@@ -11,7 +14,7 @@ def read_excel_file(file_path, table_name):
 def connect_to_database():
     connection_string = (
         'DRIVER=SQL Server;'
-        'SERVER=LAPTOP-ON5UK3V9;'
+        'SERVER=DESKTOP-95D9BB6\SQLEXPRESS;'
         'DATABASE=WebTarotDb;'
         'Trusted_Connection=yes;'
     )
@@ -94,7 +97,7 @@ def insert_data_from_excel(table_name, table_data):
 
 
 def main():
-    excel_file = "C:\\Users\\Petar\\Desktop\\tarot_and_horoscope.xlsx"
+    excel_file = "C:\\Users\\Korisnik\\Desktop\\FAKS\\IanProjekt\\WebTarotReading\\tarot_and_horoscope.xlsx"
     table_names = ["TarotCards", "HoroscopeSigns"] #Input as many tables names as you need
     tables_data = [] #Here will be saved all data from each table in 'table_names'
  
@@ -102,10 +105,10 @@ def main():
 
     for table_name in table_names:
         tables_data.append(read_excel_file(excel_file, table_name))
-    print(tables_data)
+    # print(tables_data)
 
-    for i in range(len(table_names)):
-        create_table(table_names[i], tables_data[i])
+    # for i in range(len(table_names)):
+    #     create_table(table_names[i], tables_data[i])
  
     # Connect to the database
     connection = connect_to_database()
@@ -118,5 +121,5 @@ def main():
         connection.close()
         print("Database connection closed.")
  
-if __name__ == "__main__":
-    main()
+
+main()
