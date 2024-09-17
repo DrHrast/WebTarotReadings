@@ -1,10 +1,12 @@
-﻿namespace WebTarotReadings.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace WebTarotReadings.Models
 {
 	public class TarotCardsModel
 	{
-		public int CardId { get; set; }
+		[Key]public int Id { get; set; }
 		public string CardName { get; set; }
-		public bool IsFlipped { get; set; }
-		public string CardText { get; set; }
+		public bool IsReversed { get; set; }
+		public string Meaning { get; set; }
 	}
 }
