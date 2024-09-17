@@ -2,8 +2,30 @@
 
 @rendermode InteractiveServer
 
-<h3>TarotReading</h3>
+<header>
+    <h3>TarotReading</h3>
+</header>
+
+<div class="container">
+    <div class="tarot_card" @onclick="FlipCard">
+        <div class="card_inner @(isFlipped ? "flipped" : "")">
+            <div class="card_front">
+                <!-- Front side content (e.g., card image or name) -->
+                <p>Front Side</p>
+            </div>
+            <div class="card_back">
+                <!-- Back side content -->
+                <p>Back Side</p>
+            </div>
+        </div>
+    </div>
+</div>
 
 @code {
+    private bool isFlipped = false;
 
+    private void FlipCard()
+    {
+        isFlipped = !isFlipped;
+    }
 }
