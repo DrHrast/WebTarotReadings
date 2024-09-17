@@ -14,7 +14,7 @@ def read_excel_file(file_path, table_name):
 def connect_to_database():
     connection_string = (
         'DRIVER=SQL Server;'
-        'SERVER=DESKTOP-95D9BB6\SQLEXPRESS;'
+        'SERVER=DESKTOP-95D9BB6\\SQLEXPRESS;'
         'DATABASE=WebTarotDb;'
         'Trusted_Connection=yes;'
     )
