@@ -11,7 +11,7 @@ builder.Services.AddRazorComponents()
 	.AddInteractiveServerComponents();
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("TarotContext") ??
-           throw new InvalidOperationException("Connection string ParkingContext not found")));
+           throw new InvalidOperationException("Connection string TarotContext not found")));
 
 builder.Services.AddScoped<HoroscopeSignService>();
 builder.Services.AddScoped<TarotCardsService>();
