@@ -4,18 +4,27 @@
 @using WebTarotReadings.Services
 @using WebTarotReadings.Models
 
-<header>
-    <div class="symbols">
-        <img src="/Images/tarot_symbol.png" class="rotate_clocwize" />
-        <img src="/Images/tarot_symbol.png" class="rotate_counterclocwize" />
-    </div>
-    <div class="user_data" >
-        <label for="user_name"></label>
-        <label for="dob"></label>
-        <label for="horoscope"></label>
-    </div>
-</header>
+<style>
+    body {
+        justify-content:space-between !important;
+    }
+</style>
 
+<header>
+    <div class="user_data">
+        <p>Korisničko ime: @user.Username</p>
+        <p>Datum rođenja: @user.BirthDate.Day.@user.BirthDate.Month.</p>
+        <p>Horoskopski znak: @user.HoroscopeSign</p>
+    </div>
+    <div class="symbols">
+        <img src="/Images/tarot-symbol.png" class="rotate_clocwize" />
+        <img src="/Images/tarot-symbol.png" class="rotate_counterclocwize" />
+    </div>
+    <button class="logout" onclick="@Logout">Odjava</button>
+</header>
+<div class="free-reading-text">
+    <h1>ODABERI KARTU</h1>
+    </div>
 <div class="reader_container">
     @foreach (var card in tarotCards)
     {
@@ -40,13 +49,17 @@
 </div>
 
 @code {
+    [Inject] private NavigationManager? navManager { get; set; }
     [Inject] private TarotCardsService? tarotCardsService { get; set; }
+    [Inject] private UserService? userService { get; set; }
+    [Inject] private LoggedInUserModel? loggedInUser { get; set; }
     private string imageSrc = "../Images/card_back.jpg";
     private string cardTitle = "";
     private string cardText = "";
     private int z_index = 0;
     private List<VisualTarotModel> tarotCards = new();
     Random random = new Random();
+    private UserModel user = new UserModel();
 
     public class VisualTarotModel
     {
@@ -56,9 +69,15 @@
         public int _zIndex { get; set; }
     }
 
+    private void FillUser()
+    {
+        user = userService!.GetUser(loggedInUser!.Id);
+    }
+
     protected override void OnInitialized()
     {
         GenerateCards();
+        FillUser();
     }
 
     private void GenerateCards()
@@ -87,5 +106,11 @@
         cardTitle = card._cardName!;
         cardText = card._cardText!;
         card._zIndex = ++z_index;
+    }
+
+    private void Logout()
+    {
+        loggedInUser!.Clear();
+        navManager!.NavigateTo("/");
     }
 }
