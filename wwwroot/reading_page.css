@@ -84,6 +84,11 @@ header {
     transform: rotateY(180deg); 
 }
 
+.card_name {
+    text-shadow: 4px 4px 4px #000000;
+    color: #000000;
+}
+
 .card_front:hover {
     transform: translateY(-20px);
 }
@@ -139,6 +144,7 @@ header {
 .card_title, .card_text {
     color: darkgoldenrod;
     font-size: large;
+    text-shadow: 2px 2px 1px black;
 }
 
 
