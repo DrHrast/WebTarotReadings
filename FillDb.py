@@ -14,7 +14,7 @@ def read_excel_file(file_path, table_name):
 def connect_to_database():
     connection_string = (
         'DRIVER=SQL Server;'
-        'SERVER=DESKTOP-95D9BB6\\SQLEXPRESS;'
+        'SERVER=LAPTOP-ON5UK3V9;'
         'DATABASE=WebTarotDb;'
         'Trusted_Connection=yes;'
     )
@@ -97,7 +97,7 @@ def insert_data_from_excel(table_name, table_data):
 
 
 def main():
-    excel_file = "C:\\Users\\Korisnik\\Desktop\\FAKS\\IanProjekt\\WebTarotReading\\tarot_and_horoscope.xlsx"
+    excel_file = "C:\Petar\Java\WebTarotReadings\WebTarotReadings\\tarot_and_horoscope.xlsx"
     table_names = ["TarotCards", "HoroscopeSigns"] #Input as many tables names as you need
     tables_data = [] #Here will be saved all data from each table in 'table_names'
  

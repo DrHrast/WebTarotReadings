@@ -85,12 +85,17 @@ header {
 
 .symbols {
     flex: 1;
+    height: 10%;
+    width: auto;
+    left: 20px;
+    top: 20px;
 }
-
 .symbols > img {
-    height: inherit;
+    height: 18%;
     width: auto;
     position: absolute;
+    left: 20px;
+    top: 20px;
 }
 
 .user_data {
@@ -126,9 +131,9 @@ header {
 }
 
 .rotate_clocwize {
-    animation: rotate 2s infinite;
+    animation: rotate 4s linear infinite;
 }
 
 .rotate_counterclocwize {
-    animation: counter_rotate 2s ease infinite;
+    animation: counter_rotate 4s linear infinite;
 }
